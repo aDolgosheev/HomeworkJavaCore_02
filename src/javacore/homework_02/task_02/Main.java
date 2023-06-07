@@ -20,22 +20,26 @@ public class Main {
             );
         }
 
-        
-        persons.stream()
+        long minorPersonsCount = persons.stream()
                 .filter(x -> x.getAge() < 18)
                 .count();
+        System.out.println(minorPersonsCount);
 
-        persons.stream()
+        List<String> militaryAgePersons = persons.stream()
                 .filter(x -> (x.getAge() >= 18 && x.getAge() <= 27))
                 .map(Person::getFamily)
                 .collect(Collectors.toList());
-
-        persons.stream()
+        System.out.println(militaryAgePersons);
+//        System.out.println(militaryAgePersons.size());
+//
+        List<Person> workablePersons = persons.stream()
                 .filter(x -> x.getEducation() == Education.HIGHER)
                 .filter(x -> x.getAge() >= 18)
                 .filter(x -> ((x.getSex() == Sex.MAN && x.getAge() < 65) || (x.getSex() == Sex.WOMAN && x.getAge() < 60)))
                 .sorted(Comparator.comparing(Person::getFamily))
                 .collect(Collectors.toList());
+        System.out.println(workablePersons);
+//        System.out.println(workablePersons.size());
     }
 }
 
